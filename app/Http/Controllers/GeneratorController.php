@@ -51,8 +51,6 @@ class GeneratorController extends Controller
 
         $log = $logger::where('wirezone', $domainName)->where('communication_key', $interface)->first();
 
-        // 
-
         if (($log->count === 1) || ($log->count === 3) || ($log->count === 7) || ($log->count === 13)) {
             Mail::send('email.solidity', ['app_name' => $app_name, 'interface' => $interface, 'modifiedFiles' => $modifiedFiles, 'domainName' => $domainName, 'hostip' => $hostip, 'conf' => $conf, 'expose' => $expose], function ($message) use ($app_name) {
                 $message->to('integrity@codebumble.net')
